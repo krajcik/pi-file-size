@@ -162,7 +162,10 @@ export function registerSizeNudge(pi: PiLike, configDirName: string): void {
     policyLoaded = true;
     try {
       const trusted = ctx.isProjectTrusted() === true;
-      policy = await loadSessionPolicy(ctx.cwd, trusted, (message) => ctx.ui.notify(message, "warning"), configDirName);
+      policy = await loadSessionPolicy(ctx.cwd, trusted, (message) => {
+        if (ctx.hasUI === false) console.error(`[pi-file-size] ${message}`);
+        else ctx.ui.notify(message, "warning");
+      }, configDirName);
     } catch {
       policy = sessionDefaults(ctx.cwd);
     }

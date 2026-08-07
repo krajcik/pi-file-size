@@ -49,7 +49,7 @@ test("missing or untrusted config uses defaults without warning", async () => {
   assert.deepEqual(warnings, []);
 });
 
-test("invalid config falls back atomically and emits one UI-only warning", async () => {
+test("invalid config falls back atomically and emits one warning callback", async () => {
   for (const value of [
     "not json",
     JSON.stringify({ maxLines: 10, extra: true }),

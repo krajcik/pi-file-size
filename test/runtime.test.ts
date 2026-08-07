@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test, { after } from "node:test";
 
-import { CONFIG_FILENAME } from "../src/config.ts";
+import { CONFIG_FILENAME, INVALID_CONFIG_WARNING } from "../src/config.ts";
 import { formatNudge } from "../src/policy.ts";
 import { registerSizeNudge } from "../src/runtime.ts";
 
@@ -39,18 +39,18 @@ class MockPi {
   }
 }
 
-async function setup(config: unknown = { maxLines: 3, significantGrowthLines: 2 }) {
+async function setup(config: unknown = { maxLines: 3, significantGrowthLines: 2 }, hasUI = true) {
   const root = await temporaryRoot("size-nudge-runtime-");
   await mkdir(join(root, ".pi"));
   await writeFile(join(root, ".pi", CONFIG_FILENAME), typeof config === "string" ? config : JSON.stringify(config));
   const pi = new MockPi();
   registerSizeNudge(pi as any, ".pi");
-  const warnings: string[] = [];
+  const warnings: Array<{ message: string; type: string | undefined }> = [];
   const ctx = {
     cwd: root,
     isProjectTrusted: () => true,
-    hasUI: true,
-    ui: { notify: (message: string) => warnings.push(message) },
+    hasUI,
+    ui: { notify: (message: string, type?: string) => warnings.push({ message, type }) },
   };
   await pi.emit("session_start", { type: "session_start", reason: "startup" }, ctx);
   return { root, pi, ctx, warnings };
@@ -69,6 +69,30 @@ async function invoke(pi: MockPi, ctx: any, event: any) {
   await pi.emit("tool_execution_end", { type: "tool_execution_end", toolCallId: event.toolCallId, toolName: event.toolName, result: event, isError: event.isError }, ctx);
   return patch;
 }
+
+test("invalid config reports once through UI without creating a session or model-context message", async () => {
+  const { pi, ctx, warnings } = await setup("not json");
+  assert.deepEqual(warnings, [{ message: INVALID_CONFIG_WARNING, type: "warning" }]);
+  assert.deepEqual(pi.sent, []);
+
+  assert.equal(await pi.emit("session_start", { type: "session_start", reason: "reload" }, ctx), undefined);
+  assert.deepEqual(warnings, [{ message: INVALID_CONFIG_WARNING, type: "warning" }]);
+  assert.deepEqual(pi.sent, []);
+});
+
+test("invalid config reports once to stderr in headless mode without creating model context", async (t) => {
+  const errors: string[] = [];
+  t.mock.method(console, "error", (message) => errors.push(String(message)));
+
+  const { pi, ctx, warnings } = await setup("not json", false);
+  assert.deepEqual(warnings, []);
+  assert.deepEqual(errors, [`[pi-file-size] ${INVALID_CONFIG_WARNING}`]);
+  assert.deepEqual(pi.sent, []);
+
+  assert.equal(await pi.emit("session_start", { type: "session_start", reason: "reload" }, ctx), undefined);
+  assert.deepEqual(errors, [`[pi-file-size] ${INVALID_CONFIG_WARNING}`]);
+  assert.deepEqual(pi.sent, []);
+});
 
 test("new built-in write gets one event-local nudge and preserves all other fields", async () => {
   const { root, pi, ctx } = await setup();

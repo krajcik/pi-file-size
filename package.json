@@ -1,16 +1,27 @@
 {
   "name": "pi-file-size",
   "version": "0.1.0",
+  "description": "Non-blocking, event-local file-size guidance for Pi coding agent mutations.",
   "type": "module",
+  "license": "MIT",
   "keywords": ["pi-package"],
+  "files": [
+    "extensions/size-nudge.ts",
+    "src/*.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "pi": {
     "extensions": ["./extensions/size-nudge.ts"]
   },
+  "dependencies": {},
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*"
   },
   "scripts": {
-    "test": "node --test test/*.test.ts",
-    "check": "node --check extensions/size-nudge.ts && for file in src/*.ts test/*.test.ts; do node --check \"$file\" || exit 1; done && node --test test/*.test.ts"
+    "test": "node scripts/run-tests.mjs",
+    "validate:package": "node scripts/validate-package.mjs",
+    "check": "node scripts/check.mjs"
   }
 }
