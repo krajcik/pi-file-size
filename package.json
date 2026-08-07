@@ -1,0 +1,16 @@
+{
+  "name": "pi-file-size",
+  "version": "0.1.0",
+  "type": "module",
+  "keywords": ["pi-package"],
+  "pi": {
+    "extensions": ["./extensions/size-nudge.ts"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "check": "node --check extensions/size-nudge.ts && for file in src/*.ts test/*.test.ts; do node --check \"$file\" || exit 1; done && node --test test/*.test.ts"
+  }
+}
