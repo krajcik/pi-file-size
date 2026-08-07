@@ -1,0 +1,13 @@
+server: http://vikunja:3456
+project_id: 7
+project_identifier: PI
+view_id: 28
+buckets:
+    todo: 29
+    in_progress: 30
+    in_review: 32
+    done: 31
+    scrapped: 33
+bot:
+    username: bot-pi-file-size
+    user_id: 7
