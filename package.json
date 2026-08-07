@@ -2,6 +2,10 @@
   "name": "pi-file-size",
   "version": "0.1.0",
   "description": "Non-blocking, event-local file-size guidance for Pi coding agent mutations.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krajcik/pi-file-size.git"
+  },
   "type": "module",
   "license": "MIT",
   "keywords": ["pi-package"],

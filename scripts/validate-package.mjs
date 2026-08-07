@@ -27,6 +27,11 @@ assert.equal(packageJson.name, "pi-file-size", "unexpected package name");
 assert.equal(packageJson.version, "0.1.0", "unexpected package version");
 assert.equal(packageJson.type, "module", "package must use ESM");
 assert.equal(packageJson.description, "Non-blocking, event-local file-size guidance for Pi coding agent mutations.");
+assert.deepEqual(
+  packageJson.repository,
+  { type: "git", url: "git+https://github.com/krajcik/pi-file-size.git" },
+  "package repository must match the npm trusted publisher repository",
+);
 assert.equal(packageJson.license, "MIT", "package must declare the MIT license");
 assert.ok(Array.isArray(packageJson.keywords) && packageJson.keywords.includes("pi-package"), "missing pi-package keyword");
 assert.deepEqual(packageJson.pi, { extensions: ["./extensions/size-nudge.ts"] }, "unexpected Pi package manifest");
