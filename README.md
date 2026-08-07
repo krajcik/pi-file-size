@@ -57,6 +57,12 @@ Unless force-included, content containing a NUL is treated as binary. The follow
 
 Unknown text remains eligible. Documentation, migrations, source schemas, declarative data/configuration, generic fixtures/testdata, ordinary `.d.ts`, arbitrary `.lock`/`.map` files, and `deps`, `external`, or `golden` directories are not excluded merely by category.
 
+## Compatibility and support
+
+The `0.1.0` release candidate is qualified on macOS with Node.js `26.6.0` and Pi `0.84.1`. It uses Pi's public extension API and Node.js filesystem APIs and is expected to work in other local environments supported by Pi, but Linux and Windows have not been independently qualified for this candidate. The package is for the Pi coding agent runtime, not browsers.
+
+The Pi peer range remains `*` by package convention. Compatibility has been verified specifically against Pi `0.84.1`; the range is not a claim that every historical or future Pi version is supported.
+
 ## Installation and local testing
 
 Review the source first. To try this checkout ephemerally without changing Pi settings, load its extension file for one run:
@@ -91,7 +97,7 @@ The package validator performs `npm pack --dry-run --json --ignore-scripts`, che
 
 Pi extensions execute arbitrary code with the user's full system permissions. Install or load this extension only from source you trust. This extension reads trusted-project configuration and pre-mutation file content needed for attribution. It has zero runtime dependencies and contains no telemetry, runtime network access, background sockets/processes, or runtime network imports. It does not call Pi message-injection or session-persistence APIs; only a triggering tool result is extended as described above.
 
-The implementation is designed against Pi `0.84.1` and uses Pi's documented extension events and public built-in tool source metadata. The peer range remains `*` per Pi package conventions, not as a claim that every historical or future Pi version is compatible.
+The implementation uses Pi's documented extension events and public built-in tool source metadata.
 
 Current limitations are intentionally conservative:
 
