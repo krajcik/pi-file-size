@@ -24,7 +24,7 @@ function assertBlind(value) {
   }
   if (typeof value === "string" && (
     /pi-file-size-benchmark-|AUDITED EXECUTOR PROSE|family-[ab]|working-tree|\/Users\//.test(value)
-    || new Set(["pi-file-size", "no-extension", "7022c5d", "baseline-v1"]).has(value)
+    || new Set(["pi-file-size", "no-extension", "pi-5-manual-champion-v1", "baseline-v1"]).has(value)
   )) throw new Error("judge request disclosed execution identity or a temporary path");
 }
 

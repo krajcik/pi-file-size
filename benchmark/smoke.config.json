@@ -22,7 +22,7 @@
   "variants": {
     "candidate": {
       "id": "pi-file-size",
-      "revision": "7022c5d",
+      "revision": "pi-5-manual-champion-v1",
       "extension": {
         "path": "../extensions/size-nudge.ts",
         "sourcePaths": [
@@ -32,7 +32,7 @@
           "../src/policy.ts",
           "../src/runtime.ts"
         ],
-        "sourceSha256": "8be930ae9ae4f19947a693c0ed125692116f0472e68517071de15de6bede0bc4",
+        "sourceSha256": "dc8f8fc8ef17e4e2560245674a31bdc427e807630fd280abe8abefc92e13a3db",
         "config": {
           "maxLines": 1000,
           "significantGrowthLines": 150,

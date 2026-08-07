@@ -256,7 +256,7 @@ test("offline E2E judges blind artifacts, exercises the real extension, ties ide
       { wins: 1, losses: 0, ties: 1, rate: 0.75 },
       { wins: 0, losses: 0, ties: 2, rate: 0.5 },
     ]);
-    assert.equal(first.variants.candidate.revision, "7022c5d");
+    assert.equal(first.variants.candidate.revision, "pi-5-manual-champion-v1");
     assert.deepEqual(first.variants.candidate.extension.sourcePaths, [
       "../extensions/size-nudge.ts",
       "../src/config.ts",
@@ -264,7 +264,7 @@ test("offline E2E judges blind artifacts, exercises the real extension, ties ide
       "../src/policy.ts",
       "../src/runtime.ts",
     ]);
-    assert.equal(first.variants.candidate.extension.sourceSha256, "8be930ae9ae4f19947a693c0ed125692116f0472e68517071de15de6bede0bc4");
+    assert.equal(first.variants.candidate.extension.sourceSha256, "dc8f8fc8ef17e4e2560245674a31bdc427e807630fd280abe8abefc92e13a3db");
     assert.deepEqual(first.variants.candidate.extension.config, { maxLines: 1000, significantGrowthLines: 150, include: [], exclude: [] });
   } finally {
     for (const name of injectedEnvironment) {

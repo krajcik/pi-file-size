@@ -27,7 +27,7 @@ export const NUDGE_PREFIX = "Size nudge:";
 
 export function formatNudge(afterLines: number, maxLines: number, netGrowth?: number): string {
   const growth = netGrowth === undefined ? "" : `; net growth +${netGrowth}`;
-  return `${NUDGE_PREFIX} this eligible file is now ${afterLines} physical lines (soft maximum ${maxLines}${growth}). Consider a cohesive extraction only if the new behavior has a clear local boundary; do not split solely to reach a number or refactor unrelated legacy code.`;
+  return `${NUDGE_PREFIX} this eligible file is now ${afterLines} physical lines (soft maximum ${maxLines}${growth}). Before adding more here, look for a cohesive part of the new behavior that can be safely extracted behind a clear local boundary. If none exists, leave the file intact; do not split by line count or refactor unrelated legacy code.`;
 }
 
 export function countPhysicalLines(content: string): number {

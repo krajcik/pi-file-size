@@ -15,11 +15,11 @@ const policy = { ...DEFAULT_POLICY, projectRoot: "/project", maxLines: 3, signif
 test("nudge reports size and net growth without demanding numeric file chopping", () => {
   assert.equal(
     formatNudge(1200, 1000),
-    "Size nudge: this eligible file is now 1200 physical lines (soft maximum 1000). Consider a cohesive extraction only if the new behavior has a clear local boundary; do not split solely to reach a number or refactor unrelated legacy code.",
+    "Size nudge: this eligible file is now 1200 physical lines (soft maximum 1000). Before adding more here, look for a cohesive part of the new behavior that can be safely extracted behind a clear local boundary. If none exists, leave the file intact; do not split by line count or refactor unrelated legacy code.",
   );
   assert.equal(
     formatNudge(1200, 1000, 175),
-    "Size nudge: this eligible file is now 1200 physical lines (soft maximum 1000; net growth +175). Consider a cohesive extraction only if the new behavior has a clear local boundary; do not split solely to reach a number or refactor unrelated legacy code.",
+    "Size nudge: this eligible file is now 1200 physical lines (soft maximum 1000; net growth +175). Before adding more here, look for a cohesive part of the new behavior that can be safely extracted behind a clear local boundary. If none exists, leave the file intact; do not split by line count or refactor unrelated legacy code.",
   );
 });
 
