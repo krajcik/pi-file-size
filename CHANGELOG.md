@@ -2,7 +2,10 @@
 
 All notable changes to this package are documented here.
 
-Version 0.1.0 was published to npm and GitHub on 2026-08-08.
+## 0.1.1 - 2026-08-08
+
+- Explain the file-growth problem and the trade-offs behind non-blocking size nudges.
+- Remove repository-only benchmark, qualification, tracker, and agent scaffolding from the public tree.
 
 ## 0.1.0 - 2026-08-08
 

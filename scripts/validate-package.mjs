@@ -24,7 +24,7 @@ const runtimeFiles = expectedFiles.filter((path) => path.endsWith(".ts"));
 const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
 
 assert.equal(packageJson.name, "pi-file-size", "unexpected package name");
-assert.equal(packageJson.version, "0.1.0", "unexpected package version");
+assert.equal(packageJson.version, "0.1.1", "unexpected package version");
 assert.equal(packageJson.type, "module", "package must use ESM");
 assert.equal(packageJson.description, "Non-blocking, event-local file-size guidance for Pi coding agent mutations.");
 assert.deepEqual(

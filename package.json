@@ -1,6 +1,6 @@
 {
   "name": "pi-file-size",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Non-blocking, event-local file-size guidance for Pi coding agent mutations.",
   "repository": {
     "type": "git",

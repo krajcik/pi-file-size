@@ -2,7 +2,7 @@
 
 `pi-file-size` gives Pi coding agents a size nudge when their own successful `edit` or `write` makes an eligible text file suspiciously large. It never blocks the change. It asks the agent to extract new behavior only when that behavior has a clear local boundary.
 
-Version `0.1.0` is published on [npm](https://www.npmjs.com/package/pi-file-size/v/0.1.0) and as a [GitHub release](https://github.com/krajcik/pi-file-size/releases/tag/v0.1.0).
+`pi-file-size` is published on [npm](https://www.npmjs.com/package/pi-file-size) and source releases are available on [GitHub](https://github.com/krajcik/pi-file-size/releases).
 
 ## The problem
 
@@ -67,7 +67,7 @@ Unknown text remains eligible. Documentation, migrations, source schemas, declar
 
 ## Compatibility and support
 
-The `0.1.0` release is qualified on macOS with Node.js `26.6.0` and Pi `0.84.1`. It uses Pi's public extension API and Node.js filesystem APIs and is expected to work in other local environments supported by Pi, but Linux and Windows have not been independently qualified for this release. The package is for the Pi coding agent runtime, not browsers.
+The extension has been tested on macOS with Node.js `26.6.0` and Pi `0.84.1`. It uses Pi's public extension API and Node.js filesystem APIs and is expected to work in other local environments supported by Pi, but Linux and Windows have not been independently tested. The package is for the Pi coding agent runtime, not browsers.
 
 The Pi peer range remains `*` by package convention. Compatibility has been verified specifically against Pi `0.84.1`; the range is not a claim that every historical or future Pi version is supported.
 
@@ -76,13 +76,13 @@ The Pi peer range remains `*` by package convention. Compatibility has been veri
 Review the source first. To try the published package for one run without changing Pi settings:
 
 ```bash
-pi -e npm:pi-file-size@0.1.0
+pi -e npm:pi-file-size@0.1.1
 ```
 
 To install the published version in user settings:
 
 ```bash
-pi install npm:pi-file-size@0.1.0
+pi install npm:pi-file-size@0.1.1
 ```
 
 To try this checkout directly, load its extension file for one run:
