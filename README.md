@@ -2,7 +2,7 @@
 
 `pi-file-size` is a Pi extension that gives a rare, non-blocking size nudge after an attributable built-in `edit` or `write` makes an eligible text file suspiciously large. It is guidance, not a gate: the mutation still succeeds, and the message recommends extraction only when the new behavior has a cohesive local boundary.
 
-Version `0.1.0` is prepared for local use. This README does not claim that the package has been published to npm or any other registry.
+Version `0.1.0` is published on [npm](https://www.npmjs.com/package/pi-file-size/v/0.1.0) and as a [GitHub release](https://github.com/krajcik/pi-file-size/releases/tag/v0.1.0).
 
 ## Behavior
 
@@ -59,13 +59,25 @@ Unknown text remains eligible. Documentation, migrations, source schemas, declar
 
 ## Compatibility and support
 
-The `0.1.0` release candidate is qualified on macOS with Node.js `26.6.0` and Pi `0.84.1`. It uses Pi's public extension API and Node.js filesystem APIs and is expected to work in other local environments supported by Pi, but Linux and Windows have not been independently qualified for this candidate. The package is for the Pi coding agent runtime, not browsers.
+The `0.1.0` release is qualified on macOS with Node.js `26.6.0` and Pi `0.84.1`. It uses Pi's public extension API and Node.js filesystem APIs and is expected to work in other local environments supported by Pi, but Linux and Windows have not been independently qualified for this release. The package is for the Pi coding agent runtime, not browsers.
 
 The Pi peer range remains `*` by package convention. Compatibility has been verified specifically against Pi `0.84.1`; the range is not a claim that every historical or future Pi version is supported.
 
 ## Installation and local testing
 
-Review the source first. To try this checkout ephemerally without changing Pi settings, load its extension file for one run:
+Review the source first. To try the published package for one run without changing Pi settings:
+
+```bash
+pi -e npm:pi-file-size@0.1.0
+```
+
+To install the published version in user settings:
+
+```bash
+pi install npm:pi-file-size@0.1.0
+```
+
+To try this checkout directly, load its extension file for one run:
 
 ```bash
 pi -e /absolute/path/to/pi-file-size/extensions/size-nudge.ts
@@ -81,7 +93,7 @@ pi install /absolute/path/to/pi-file-size
 pi install ./relative/path/to/pi-file-size -l
 ```
 
-Local paths are referenced in place rather than copied. Project-local packages load only after project trust. These commands describe local loading only; there is currently no npm install command to advertise.
+Local paths are referenced in place rather than copied. Project-local packages load only after project trust.
 
 Run deterministic repository checks without installing dependencies:
 

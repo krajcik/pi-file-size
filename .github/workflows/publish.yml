@@ -10,16 +10,17 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 concurrency:
   group: npm-publish-${{ inputs.tag }}
   cancel-in-progress: false
 
 jobs:
-  publish:
+  validate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      release_commit: ${{ steps.release.outputs.commit }}
     steps:
       - name: Check out the release tag
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -32,10 +33,10 @@ jobs:
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: "24.19.0"
-          registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
       - name: Verify release inputs and toolchain
+        id: release
         env:
           RELEASE_TAG: ${{ inputs.tag }}
         run: |
@@ -49,9 +50,39 @@ jobs:
           test "$(git rev-list -n 1 "$RELEASE_TAG")" = "$(git rev-parse HEAD)"
           package_version="$(node -p "require('./package.json').version")"
           test "$RELEASE_TAG" = "v$package_version"
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Run deterministic checks
         run: npm run check
 
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out the validated commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: ${{ needs.validate.outputs.release_commit }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24.19.0"
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Verify validated commit and toolchain
+        env:
+          RELEASE_COMMIT: ${{ needs.validate.outputs.release_commit }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$RELEASE_COMMIT"
+          test "$(node --version)" = "v24.19.0"
+          test "$(npm --version)" = "11.17.0"
+
       - name: Publish with npm trusted publishing
-        run: npm publish --access public --ignore-scripts
+        run: npm publish --access public --ignore-scripts --registry=https://registry.npmjs.org/

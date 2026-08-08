@@ -2,9 +2,9 @@
 
 All notable changes to this package are documented here.
 
-This repository is prepared at version 0.1.0 for local packaging; no public release is claimed.
+Version 0.1.0 was published to npm and GitHub on 2026-08-08.
 
-## 0.1.0 - 2026-08-07 (release candidate)
+## 0.1.0 - 2026-08-08
 
 - Select a 1,000-line default soft maximum and actionable wording that preserves cohesive files when no safe local extraction exists.
 - Add event-local, non-blocking size nudges for attributable built-in Pi `edit` and `write` mutations.
