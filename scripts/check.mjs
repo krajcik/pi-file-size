@@ -16,7 +16,7 @@ function run(args) {
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
 
-const sourceDirectories = ["extensions", "src", "test", "scripts", "benchmark"];
+const sourceDirectories = ["extensions", "src", "test", "scripts"];
 const syntaxFiles = sourceDirectories
   .filter((path) => statSync(path).isDirectory())
   .flatMap(filesUnder)

@@ -1,0 +1,15 @@
+# Local agent and issue-tracker metadata
+/.veans.yml
+/AGENTS.md
+/CONTEXT.md
+/docs/
+/benchmark/
+/test/benchmark.test.ts
+
+# Dependencies and generated output
+/node_modules/
+/coverage/
+/dist/
+*.tgz
+npm-debug.log*
+.DS_Store

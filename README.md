@@ -1,8 +1,16 @@
 # pi-file-size
 
-`pi-file-size` is a Pi extension that gives a rare, non-blocking size nudge after an attributable built-in `edit` or `write` makes an eligible text file suspiciously large. It is guidance, not a gate: the mutation still succeeds, and the message recommends extraction only when the new behavior has a cohesive local boundary.
+`pi-file-size` gives Pi coding agents a size nudge when their own successful `edit` or `write` makes an eligible text file suspiciously large. It never blocks the change. It asks the agent to extract new behavior only when that behavior has a clear local boundary.
 
 Version `0.1.0` is published on [npm](https://www.npmjs.com/package/pi-file-size/v/0.1.0) and as a [GitHub release](https://github.com/krajcik/pi-file-size/releases/tag/v0.1.0).
+
+## The problem
+
+A coding agent usually takes the shortest safe path to finish the current change. If related code is already in an open file, the agent tends to keep adding there. Repeated edits can turn one file into a mix of unrelated responsibilities that is harder to navigate, review, and test.
+
+A hard line-count limit creates a different problem. It can block a necessary fix, punish a small edit to an old large file, or push the agent into arbitrary file splitting. Constant warnings are easy to ignore and consume model context even when no useful refactor exists.
+
+This extension intervenes only after an attributable mutation crosses the configured soft maximum or adds substantial growth to a file that was already over it. The nudge reports the measured size and asks for a cohesive extraction. It also says to leave the file intact when no safe boundary exists.
 
 ## Behavior
 
